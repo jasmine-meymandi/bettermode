@@ -1,5 +1,19 @@
 {
   "files": [],
+  "compilerOptions": {
+   "rootDir": ".",
+   "baseUrl": ".",
+   "resolveJsonModule": true,
+   "isolatedModules": true,
+    "types": ["node"],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "paths": {
+      "@/*": ["/src/*"],
+      "@/utils/*": ["/src/utils/*"],
+    }
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
