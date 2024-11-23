@@ -1,6 +1,5 @@
 import fs from "node:fs/promises";
 import express from "express";
-console.log("server.js");
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
@@ -52,12 +51,21 @@ app.use("*", async (req, res) => {
     }
 
     const rendered = await render(url, ssrManifest);
-
-    const html = template
+    console.log(rendered, "rendered");
+    const fullhtml = template
       .replace(`<!--app-head-->`, rendered.head ?? "")
-      .replace(`<!--app-html-->`, rendered.html ?? "");
+      .replace(`<!--app-html-->`, rendered.html ?? "")
+      .replace(
+        `</body>`,
+        `<script>
+       window.__APOLLO_STATE__ = ${JSON.stringify(rendered?.state).replace(
+         /</g,
+         "\\u003c"
+       )};
+     </script></body>`
+      );
 
-    res.status(200).set({ "Content-Type": "text/html" }).send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).send(fullhtml);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
     console.log(e.stack);
