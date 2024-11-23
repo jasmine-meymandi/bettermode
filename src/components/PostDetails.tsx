@@ -1,63 +1,63 @@
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-export const GET_POST_DETAILS = gql`
-  query GetPost($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      description
-      createdAt
-      thumbnail {
-        ... on Image {
-          url
-        }
-      }
-      fields {
-        key
-        value
-      }
-    }
-  }
-`;
+// import { gql } from "@apollo/client";
+// import { useQuery } from "@apollo/client";
+// import React from "react";
+// import { useParams, Link } from "react-router-dom";
+// export const GET_POST_DETAILS = gql`
+//   query GetPost($id: ID!) {
+//     post(id: $id) {
+//       id
+//       title
+//       description
+//       createdAt
+//       thumbnail {
+//         ... on Image {
+//           url
+//         }
+//       }
+//       fields {
+//         key
+//         value
+//       }
+//     }
+//   }
+// `;
 
-interface PostDetailsParams {
-  id: string;
-}
+// interface PostDetailsParams {
+//   id: string;
+// }
 
-interface Field {
-  key: string;
-  value: string;
-}
+// interface Field {
+//   key: string;
+//   value: string;
+// }
 
-interface PostDetailsData {
-  post: {
-    id: string;
-    title: string;
-    description: string;
-    createdAt: string;
-    thumbnail?: {
-      url: string;
-    };
-    fields: Field[];
-  };
-}
+// interface PostDetailsData {
+//   post: {
+//     id: string;
+//     title: string;
+//     description: string;
+//     createdAt: string;
+//     thumbnail?: {
+//       url: string;
+//     };
+//     fields: Field[];
+//   };
+// }
 
 export const PostDetails: React.FC = () => {
-  const { id } = useParams<any>(); // Get post ID from URL parameters
-  const { loading, error, data } = useQuery<PostDetailsData>(GET_POST_DETAILS, {
-    variables: { id },
-  });
+  // const { id } = useParams<any>(); // Get post ID from URL parameters
+  // const { loading, error, data } = useQuery<PostDetailsData>(GET_POST_DETAILS, {
+  //   variables: { id },
+  // });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error.message}</p>;
 
-  const { title, description, createdAt, thumbnail, fields } = data!.post;
+  // const { title, description, createdAt, thumbnail, fields } = data!.post;
 
   return (
     <div className="p-6">
-      <h1 className="mb-4 text-3xl font-bold text-center">{title}</h1>
+      {/* <h1 className="mb-4 text-3xl font-bold text-center">{title}</h1>
       {thumbnail && (
         <img
           src={thumbnail.url}
@@ -86,7 +86,7 @@ export const PostDetails: React.FC = () => {
         >
           Back to Posts
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

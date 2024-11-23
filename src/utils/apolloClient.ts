@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_ENDPOINT,
@@ -8,6 +8,7 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
+  ssrMode: typeof window === "undefined", // true on server, false on client
   link: httpLink,
   cache: new InMemoryCache(),
 });
