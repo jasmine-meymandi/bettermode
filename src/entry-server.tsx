@@ -1,12 +1,11 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import pkg from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import App from "./App";
 import "./index.css";
 import client from "./utils/apolloClient";
-const { ApolloProvider } = pkg;
 export async function render(url: string) {
   const AppTree = (
     <StrictMode>

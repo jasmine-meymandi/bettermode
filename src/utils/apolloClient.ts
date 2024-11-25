@@ -1,6 +1,5 @@
-import pkg from '@apollo/client/core/core.cjs';
-const { ApolloClient, InMemoryCache, createHttpLink } = pkg;
-
+import { ApolloClient, InMemoryCache } from '@apollo/client/core';
+import { createHttpLink } from '@apollo/client/link/http';
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_ENDPOINT,
   headers: {
