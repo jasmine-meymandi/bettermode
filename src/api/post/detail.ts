@@ -16,12 +16,19 @@ export const GET_POST_DETAILS = gql`
         key
         value
       }
-      owner{
-        member{
-          id
-          name
-        }
-      }
+      owner {
+            member{
+              id
+              email
+              name
+              profilePicture {
+                __typename
+                ... on Image {
+                  url
+               }
+              }
+            }
+          }
       hasMoreContent
       reactionsCount
     }
