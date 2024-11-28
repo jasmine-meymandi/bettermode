@@ -3,6 +3,7 @@ import PostItem from "./PostItem";
 
 import { useQuery, useMutation } from "@apollo/client/react/hooks/";
 import { GET_POSTS, ADD_REACTION, getPostsVariables } from "../../api";
+import { useEffect } from "react";
 
 export const PostList = (): React.ReactElement | null => {
   const {
@@ -10,6 +11,7 @@ export const PostList = (): React.ReactElement | null => {
     error,
     data: postList,
     fetchMore,
+    refetch,
   } = useQuery(GET_POSTS, {
     variables: {
       limit: 2,
@@ -18,7 +20,10 @@ export const PostList = (): React.ReactElement | null => {
       postTypeIds: ["8fn7djP3Bz2ZQ20"],
     },
   });
-
+  useEffect(() => {
+    // Trigger a refetch when the component mounts
+    refetch();
+  }, [refetch]);
   const [addReaction] = useMutation(ADD_REACTION);
   const handleLikeClick = async (postId: string) => {
     try {
@@ -36,7 +41,6 @@ export const PostList = (): React.ReactElement | null => {
             query: GET_POSTS,
             variables: getPostsVariables,
           });
-          console.log(data, cache);
           if (data) {
             const updatedData = {
               ...data,
