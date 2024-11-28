@@ -151,43 +151,15 @@ export interface ServerResponse {
 }
 export interface Post {
   id: string;
-  slug: string;
-  mappingFields: MappingField[];
   fields: Field[];
-  subscribersCount: number;
-  postTypeId: string;
   reactionsCount: number;
   hasMoreContent: boolean;
-  isAnonymous: boolean;
-  isHidden: boolean;
-  shortContent: string;
-  createdAt: string;
   publishedAt: string;
   ownerId: string;
-  createdById: string;
-  status: string;
-  spaceId: string;
-  imageIds: string[];
-  pinnedInto: string[];
-  repliesCount: number;
-  totalRepliesCount: number;
-  locked: boolean;
-  repliedToIds: string[];
-  repliedToId: string | null;
   title: string;
   description: string;
-  thumbnail: string | null;
-  embedIds: string[];
-  mentionedMembers: string[];
-  primaryReactionType: string;
-  lastActivityAt: string;
-  language: string;
-  customSeoDetail: CustomSeoDetail;
-  relativeUrl: string;
   url: string;
-  attachments: string[];
   owner: Owner;
-  space: Space;
   reactions: Reaction[];
 }
 

@@ -113,7 +113,7 @@ export const PostList = (): React.ReactElement | null => {
           <div className="mt-6 text-center">
             <button
               onClick={handleShowMore}
-              className="px-6 py-2 text-white transition duration-200 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
+              className="z-50 px-6 py-2 text-white transition duration-200 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
             >
               Show More
             </button>
