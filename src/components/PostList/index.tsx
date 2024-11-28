@@ -1,4 +1,4 @@
-import type { Post, ServerResponse } from "../../api/post/type";
+import type { Post, ServerResponse } from "../../api";
 import PostItem from "./PostItem";
 
 import { useQuery, useMutation } from "@apollo/client/react/hooks/";

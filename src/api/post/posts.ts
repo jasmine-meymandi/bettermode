@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client/core';
-import client from '../../utils/apolloClient';
 
 export const GET_POSTS = gql`
  query GetPosts(

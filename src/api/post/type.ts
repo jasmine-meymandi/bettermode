@@ -199,3 +199,10 @@ export interface PostList {
   };
   nodes: ServerPost[];
 }
+
+export interface GetPostResponse {
+
+  post: Post
+
+}
+

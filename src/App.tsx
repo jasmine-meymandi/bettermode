@@ -13,7 +13,14 @@ const App = () => {
           </Suspense>
         }
       />
-      <Route path="/post/:id" element={<PostDetails />} />
+      <Route
+        path="/post/:id"
+        element={
+          <Suspense fallback={<p>Loading...</p>}>
+            <PostDetails />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };
