@@ -21,7 +21,7 @@ export const PostItem = ({ post, onLikeClick }: Props): React.ReactElement => {
             {post.description || "No description available"}
           </p>
           <p className="text-sm text-center text-gray-600">
-            {post.reactionsCount || 0} Reactions
+            {post.reactionsCount || 0} Like
           </p>
         </div>
       </Link>
@@ -32,7 +32,7 @@ export const PostItem = ({ post, onLikeClick }: Props): React.ReactElement => {
         >
           ❤️ Like
         </button>
-        <p className="text-sm text-gray-700">{post.repliesCount || 0} likes</p>
+        <p className="text-sm text-gray-700">{post.reactionsCount || 0} like</p>
       </div>
     </div>
   );

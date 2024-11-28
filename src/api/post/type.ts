@@ -144,7 +144,11 @@ export interface ServerPostList {
   };
   nodes: ServerPost[];
 }
+export interface ServerResponse {
 
+  posts: ServerPostList
+
+}
 export interface Post {
   id: string;
   slug: string;

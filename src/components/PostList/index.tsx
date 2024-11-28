@@ -1,7 +1,9 @@
-import type { Post } from "../../api/post/type";
+import type { Post, ServerResponse } from "../../api/post/type";
 import PostItem from "./PostItem";
+
 import { useQuery, useMutation } from "@apollo/client/react/hooks/";
-import { GET_POSTS } from "../../api/post";
+import { GET_POSTS, ADD_REACTION, getPostsVariables } from "../../api";
+
 export const PostList = (): React.ReactElement | null => {
   const {
     loading,
@@ -16,6 +18,50 @@ export const PostList = (): React.ReactElement | null => {
       postTypeIds: ["8fn7djP3Bz2ZQ20"],
     },
   });
+
+  const [addReaction] = useMutation(ADD_REACTION);
+  const handleLikeClick = async (postId: string) => {
+    try {
+      await addReaction({
+        variables: {
+          postId,
+          input: {
+            reaction: "heart", // Example reaction
+            overrideSingleChoiceReactions: false,
+          },
+        },
+
+        update: (cache) => {
+          const data: ServerResponse | null = cache.readQuery({
+            query: GET_POSTS,
+            variables: getPostsVariables,
+          });
+          console.log(data, cache);
+          if (data) {
+            const updatedData = {
+              ...data,
+              posts: {
+                ...data.posts,
+                nodes: data.posts.nodes.map((post: Post) => {
+                  if (post.id === postId) {
+                    return {
+                      ...post,
+                      reactionsCount: (post.reactionsCount || 0) + 1,
+                    };
+                  }
+                  return post;
+                }),
+              },
+            };
+
+            cache.writeQuery({ query: GET_POSTS, data: updatedData });
+          }
+        },
+      });
+    } catch (error) {
+      console.error("Error adding reaction:", error);
+    }
+  };
 
   if (loading && typeof window === "undefined") {
     // Return an empty React fragment instead of null
@@ -55,7 +101,7 @@ export const PostList = (): React.ReactElement | null => {
             <PostItem
               key={post.id}
               post={post}
-              onLikeClick={() => console.log("hiii")}
+              onLikeClick={() => handleLikeClick(post.id)}
             />
           ))}
         </div>
