@@ -97,10 +97,12 @@ export const PostList = (): React.ReactElement | null => {
     }
   };
   return (
-    <div>
-      <div className="p-6">
-        <h1 className="mb-6 text-2xl font-bold text-center">Posts</h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <div className="min-h-screen text-white bg-gray-200">
+      <div className="container mx-auto p-9">
+        <h1 className="mb-8 text-4xl font-bold text-center text-gray-900">
+          Posts
+        </h1>
+        <div className="space-y-6">
           {postList?.posts?.nodes?.map((post: Post) => (
             <PostItem
               key={post.id}
@@ -113,7 +115,7 @@ export const PostList = (): React.ReactElement | null => {
           <div className="mt-6 text-center">
             <button
               onClick={handleShowMore}
-              className="z-50 px-6 py-2 text-white transition duration-200 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
+              className="z-50 px-6 py-3 text-white transition duration-200 bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700"
             >
               Show More
             </button>
