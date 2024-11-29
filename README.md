@@ -164,7 +164,7 @@ For testing purposes, use the following credentials:
 
 ## 📹 Video Presentation
 
-[Watch Demo Video](#) _(Replace with your video link)_
+[Watch Demo Video](#) \_(https://www.youtube.com/watch?v=CYt2GZ6nLlk)
 
 ## ✨ Enhancements
 
