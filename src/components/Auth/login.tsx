@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { mockGraphQLApi } from "../api";
-import { useAuth } from "../utils/hooks";
+import { mockGraphQLApi } from "../../api";
+import { useAuth } from "../../utils/auth-context";
 
 const Login = () => {
   const { login } = useAuth();
@@ -22,10 +22,9 @@ const Login = () => {
       `,
         { email, password }
       );
-      // Save token to localStorage
       if (response?.data?.login?.token) {
         login(response?.data?.login?.token);
-        window.location.href = "/"; // Redirect to homepage
+        window.location.href = "/";
       } else {
         throw new Error("Token not found");
       }

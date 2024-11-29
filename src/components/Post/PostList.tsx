@@ -97,31 +97,29 @@ export const PostList = (): React.ReactElement | null => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-200">
-      <div className="container px-48 mx-auto py-9">
-        <h1 className="mb-8 text-4xl font-bold text-center text-gray-900">
-          Posts
-        </h1>
-        <div className="space-y-6">
-          {postList?.posts?.nodes?.map((post: Post) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              onLikeClick={() => handleLikeClick(post.id)}
-            />
-          ))}
-        </div>
-        {postList?.posts?.pageInfo?.hasNextPage && (
-          <div className="mt-6 text-center">
-            <button
-              onClick={handleShowMore}
-              className="z-50 px-6 py-3 text-white transition duration-200 bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700"
-            >
-              Show More
-            </button>
-          </div>
-        )}
+    <div className="container px-48 mx-auto py-9">
+      <h1 className="mb-8 text-4xl font-bold text-center text-gray-900">
+        Posts
+      </h1>
+      <div className="space-y-6">
+        {postList?.posts?.nodes?.map((post: Post) => (
+          <PostItem
+            key={post.id}
+            post={post}
+            onLikeClick={() => handleLikeClick(post.id)}
+          />
+        ))}
       </div>
+      {postList?.posts?.pageInfo?.hasNextPage && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleShowMore}
+            className="z-50 px-6 py-3 text-white transition duration-200 bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700"
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,17 +1,19 @@
-import { mockGraphQLApi } from "../api";
-import { useAuth } from "../utils/hooks";
+import { mockGraphQLApi } from "../../api";
+import { useAuth } from "../../utils/auth-context";
 
 const LogoutButton = () => {
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    await mockGraphQLApi(`
+    await mockGraphQLApi(
+      `
       mutation Logout {
         logout {
           success
         }
       }
-    `);
+    `
+    );
     logout();
   };
 

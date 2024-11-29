@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Suspense } from "react";
-import PostList from "./components/PostList";
-import PostDetails from "./components/PostDetails";
-import Login from "./components/login";
+import HomePage from "./components/HomePage";
+import PostDetails from "./components/Post/PostDetails";
+import Login from "./components/Auth/login";
 import { useAuth } from "./utils/auth-context";
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
         element={
           isAuthenticated ? (
             <Suspense fallback={<p>Loading...</p>}>
-              <PostList />
+              <HomePage />
             </Suspense>
           ) : (
             <Navigate to="/login" replace />
