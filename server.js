@@ -1,9 +1,11 @@
 import fs from "node:fs/promises";
 import express from "express";
+import cookieParser from "cookie-parser";
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
 const base = process.env.BASE || "/";
+const JWT_SECRET = "your-secret-key";
 
 // Cached production assets
 const templateHtml = isProduction
@@ -15,6 +17,7 @@ const ssrManifest = isProduction
 
 // Create http server
 const app = express();
+app.use(cookieParser());
 
 // Add Vite or respective production middlewares
 let vite;
@@ -33,15 +36,15 @@ if (!isProduction) {
   app.use(base, sirv("./dist/client", { extensions: [] }));
 }
 
-// Serve HTML
 app.use("*", async (req, res) => {
   try {
-    const url = req.originalUrl.replace(base, "");
+    const authToken = req.cookies.authToken || "";
+    const url =
+      base === "/" ? req.originalUrl : req.originalUrl.replace(base, "");
 
     let template;
     let render;
     if (!isProduction) {
-      // Always read fresh template in development
       template = await fs.readFile("./index.html", "utf-8");
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
@@ -49,8 +52,8 @@ app.use("*", async (req, res) => {
       template = templateHtml;
       render = (await import("./dist/server/entry-server.js")).render;
     }
+    const rendered = await render(url, authToken);
 
-    const rendered = await render(url, ssrManifest);
     const fullhtml = template
       .replace(`<!--app-head-->`, rendered.head ?? "")
       .replace(`<!--app-html-->`, rendered.html ?? "")
@@ -71,7 +74,6 @@ app.use("*", async (req, res) => {
     res.status(500).end(e.stack);
   }
 });
-
 // Start http server
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);

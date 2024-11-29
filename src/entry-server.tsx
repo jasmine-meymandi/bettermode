@@ -6,25 +6,30 @@ import { getDataFromTree } from "@apollo/client/react/ssr";
 import App from "./App";
 import "./index.css";
 import client from "./utils/apolloClient";
-export async function render(url: string) {
+import { AuthProvider } from "./utils/auth-context";
+
+export async function render(url: string, authToken?: string) {
   const AppTree = (
     <StrictMode>
       <ApolloProvider client={client}>
         <StaticRouter location={url}>
-          <App />
+          <AuthProvider token={authToken}>
+            <App />
+          </AuthProvider>
         </StaticRouter>
       </ApolloProvider>
     </StrictMode>
   );
 
-  // Wait for all GraphQL data to be fetched
-  await getDataFromTree(AppTree);
+  try {
+    await getDataFromTree(AppTree);
+  } catch (err) {
+    console.error("SSR: Error during getDataFromTree:", err);
+  }
 
   const content = renderToString(AppTree);
 
-  // Extract the Apollo Client cache to pass to the client
   const initialState = client.extract();
-
   return {
     html: content,
     state: initialState,

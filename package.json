@@ -15,8 +15,11 @@
     "@apollo/client": "^3.11.10",
     "@apollo/react-ssr": "^4.0.0",
     "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"

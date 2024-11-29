@@ -98,7 +98,7 @@ export const PostList = (): React.ReactElement | null => {
   };
   return (
     <div className="min-h-screen bg-gray-200">
-      <div className="container mx-auto p-9">
+      <div className="container px-48 mx-auto py-9">
         <h1 className="mb-8 text-4xl font-bold text-center text-gray-900">
           Posts
         </h1>

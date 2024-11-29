@@ -15,7 +15,7 @@ export const PostItem = ({ post, onLikeClick }: Props): React.ReactElement => {
       ?.value.replace(/^"|"$/g, "")
       .replace(/\\"/g, '"') || "";
 
-  const [isExpanded, setIsExpanded] = useState(content.length < 200);
+  const [isExpanded, setIsExpanded] = useState(content.length < 300);
 
   const toggleContent = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent `Link` navigation when clicking "See More"
@@ -55,7 +55,7 @@ export const PostItem = ({ post, onLikeClick }: Props): React.ReactElement => {
       <div className="relative mb-4">
         <div
           className={`prose-sm prose text-gray-600 max-w-none overflow-hidden transition-all duration-300 ${
-            isExpanded ? "max-h-none" : "max-h-72"
+            isExpanded ? "max-h-none" : "max-h-52"
           }`}
           dangerouslySetInnerHTML={{
             __html: content,
@@ -67,7 +67,7 @@ export const PostItem = ({ post, onLikeClick }: Props): React.ReactElement => {
       </div>
 
       {/* See More Button */}
-      {content.length > 200 && (
+      {content.length > 300 && (
         <button
           onClick={toggleContent}
           className="z-50 mt-4 font-medium text-blue-500 hover:text-blue-700"
